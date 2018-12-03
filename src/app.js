@@ -26,13 +26,12 @@ var User = require('../models/user')
 // servicio get user
 
 app.get('/user', (req,res) => {
-  res.send (
-    {
-      name: "Victor",
-      job: "Doctor"
-    }
-    
-  )
+  User.find({}, 'name job', function (error, users) {
+	  if (error) { console.error(error); }
+	  res.send({
+			users: users
+		})
+	}).sort({_id:-1}) 
 })
 
 // Crear usuario 
